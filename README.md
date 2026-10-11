@@ -1,6 +1,6 @@
 # Chinese Word Game · 汉语
 
-A small game for learning Mandarin Chinese: HSK 1 and HSK 2 vocabulary in bite-sized units, plus a Pinyin basics track for the sounds (4 tones, 23 initials, 24 finals and the 2 tone rules). Flashcards, a quiz, listening, matching pairs, a tone quiz, a searchable word list, and speaking practice with a pronunciation score.
+A small game for learning Mandarin Chinese: HSK 1 and HSK 2 vocabulary in bite-sized units, plus a Pinyin basics track for the sounds (4 tones, 23 initials, 24 finals and the 2 tone rules). A reels-style swipe feed, flashcards, a quiz, listening, matching pairs, a tone quiz, a searchable word list, and speaking practice with a pronunciation score.
 
 **Play it:** https://ansilins.github.io/chinese-word-game/
 
@@ -20,6 +20,7 @@ Speaking practice uses a speech checker that runs on the phone. The first time y
 
 ## How the game works
 
+- **刷词 Swipe** works like reels: full-screen cards, swipe up for the next one. New words are introduced, then come back as quick tests: a “do you remember?” card you swipe right if you knew it and left if you didn't, a meaning pick, a listening pick and a tone pick. Double-tap a card to ❤️ save the word (it's starred in the word list). It uses this unit, with some words from finished units mixed in.
 - Each level is split into units of at most 12 words, with topics mixed. A word counts as learned after 3 right answers (a wrong answer moves it back one step) and is mastered after 5. When 80% of a unit is learned, the next unit opens. Practice only uses the current unit, finished units and a mixed review of them.
 - Pinyin is coloured by tone everywhere: 1st red, 2nd orange, 3rd green, 4th blue, neutral grey. The **Pinyin hide** switch hides it in the games so you can test yourself on characters only.
 - The tone quiz accepts both the written and the spoken tones where they change in speech (two 3rd tones like 你好 nǐ hǎo, said ní hǎo; 一 and 不) and explains why.

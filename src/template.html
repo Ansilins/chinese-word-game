@@ -314,7 +314,7 @@ footer{font-size:.82rem;color:var(--muted)}
 .li .de .py{font-size:.85rem}
 .uwd .hz{font-size:1.2rem}
 .uwd .py{font-size:.85rem}
-nav.modes{grid-template-columns:repeat(7,1fr)}
+nav.modes{grid-template-columns:repeat(8,1fr)}
 @media (max-width:560px){nav.modes{grid-template-columns:repeat(4,1fr)}}
 nav.modes button b{font-family:var(--f-zh);font-weight:700}
 .modecards{grid-template-columns:repeat(3,1fr)}
@@ -416,6 +416,61 @@ nav.modes button b{font-family:var(--f-zh);font-weight:700}
 .ppgame .options{grid-template-columns:1fr 1fr}
 .sticky-go{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;z-index:5}
 .sticky-go .btn{box-shadow:var(--shadow)}
+
+/* 刷词 swipe: full-screen cards that snap like reels */
+html.swiping,html.swiping body{overflow:hidden;height:100%}
+#swipeView{position:fixed;inset:0;z-index:40;background:var(--bg)}
+.swfeed{position:absolute;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior-y:contain;scrollbar-width:none}
+.swfeed::-webkit-scrollbar{display:none}
+.reel{position:relative;height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:grid;place-items:center;overflow:hidden;touch-action:pan-y;
+  padding:calc(66px + env(safe-area-inset-top,0px)) calc(70px + env(safe-area-inset-right,0px)) calc(52px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));
+  background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.reel:nth-child(even){background-color:color-mix(in srgb,var(--accent) 7%,var(--bg))}
+.rin{width:min(520px,100%);display:grid;gap:14px;justify-items:center;text-align:center}
+.pill{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700;background:var(--accent);color:var(--accent-ink);border-radius:99px;padding:4px 12px}
+.rin .wd{justify-items:center}
+.rbig{font-size:clamp(4rem,24vw,7.5rem);line-height:1.05;white-space:nowrap}
+.rbig.l3{font-size:clamp(3rem,17vw,6rem)} .rbig.l4{font-size:clamp(2.5rem,13vw,5rem)}
+.rcard .rbig{font-size:clamp(3.4rem,20vw,6.5rem)} .rcard .rbig.l3{font-size:clamp(2.6rem,14vw,5rem)} .rcard .rbig.l4{font-size:clamp(2.1rem,11vw,4.2rem)}
+.reel{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.rin .wd .py.rpy{font-size:clamp(1.4rem,6.5vw,2.1rem)}
+.rhead{font-family:var(--f-display);font-weight:800;font-size:1.6rem}
+.ren{font-family:var(--f-hand);font-size:clamp(1.7rem,7.5vw,2.6rem);line-height:1.15}
+.ren.small{font-size:1.3rem}
+.reel:not(.revealed) .hidden-en{visibility:hidden}
+.hidepy .reel:not(.revealed) .py.q{visibility:hidden}
+.rsub{color:var(--muted);font-size:.9rem;margin:0;max-width:30em}
+.rsub .py{font-size:1rem}
+.rcard{position:relative;width:100%;border:2px dashed var(--line);border-radius:18px;background:var(--surface);padding:30px 16px 22px;display:grid;gap:10px;justify-items:center;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;box-shadow:var(--shadow)}
+.rcard.was-yes{border:2px solid var(--good)} .rcard.was-no{border:2px solid var(--bad)}
+.stamp{position:absolute;top:12px;font-family:var(--f-display);font-weight:800;font-size:1.2rem;border:3px solid;border-radius:10px;padding:1px 10px;opacity:0;text-transform:uppercase;pointer-events:none}
+.stamp.yes{left:12px;color:var(--good);transform:rotate(-12deg)} .stamp.no{right:12px;color:var(--bad);transform:rotate(12deg)}
+.tapme{color:var(--muted);font-size:.9rem}
+.lr{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.ropts{display:grid;gap:10px;width:100%}
+.ropts .opt{justify-content:center;font-size:1.15rem}
+.rfb{min-height:1.5em;font-size:1rem}
+.okc{color:var(--good)} .noc{color:var(--bad)}
+.swhint{position:absolute;bottom:calc(12px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:var(--muted);font-size:.8rem;animation:bob 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.swtop{position:absolute;z-index:3;left:0;right:0;top:0;display:flex;align-items:center;gap:10px;pointer-events:none;
+  padding:calc(10px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) 14px max(14px,env(safe-area-inset-left,0px));
+  background:linear-gradient(var(--bg) 55%,transparent)}
+.swtop>*{pointer-events:auto}
+.swtitle{flex:1;display:grid;min-width:0;line-height:1.2}.swtitle b{font-family:var(--f-display);font-size:1.05rem}
+.swtitle span{font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.swstat{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums} #swXp{color:var(--good);margin-left:6px}
+.swbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:1.15rem;box-shadow:var(--shadow);padding:0;line-height:1}
+.swbtn svg{width:20px;height:20px;fill:var(--ink)}
+.swbtn .zh{font-weight:700}
+.swbtn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#swStar[aria-pressed="true"]{background:var(--surface);color:inherit;border-color:var(--bad)}
+.rail{position:absolute;z-index:3;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(64px + env(safe-area-inset-bottom,0px));display:grid;gap:12px}
+.heart{position:absolute;left:50%;top:45%;font-size:5rem;transform:translate(-50%,-50%) scale(.2);animation:heart .9s ease-out forwards;pointer-events:none;z-index:4}
+@keyframes heart{30%{transform:translate(-50%,-50%) scale(1.2);opacity:1}100%{transform:translate(-50%,-130%) scale(1);opacity:0}}
+.swtoast{position:absolute;z-index:5;left:16px;right:16px;top:calc(72px + env(safe-area-inset-top,0px))}
+.modecard.feat{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.modecard.feat .d{color:inherit;opacity:.85}
 </style>
 
 <div id="homeView" class="hwrap">
@@ -442,6 +497,7 @@ nav.modes button b{font-family:var(--f-zh);font-weight:700}
   <div class="voice-warn voiceWarn" hidden>No Mandarin voice was found on this device, so words may be read in the wrong language or not at all. On an iPhone, add one in Settings under Accessibility, Spoken Content, Voices, Chinese (China mainland). On a computer, add a Chinese (Mandarin) voice in your system's speech settings.</div>
 
   <nav class="modes" role="tablist" aria-label="Game mode">
+    <button role="tab" data-mode="swipe"><b lang="zh-CN">刷词</b><span>Swipe</span></button>
     <button role="tab" data-mode="cards"><b lang="zh-CN">卡片</b><span>Flashcards</span></button>
     <button role="tab" data-mode="quiz"><b lang="zh-CN">测验</b><span>Pick meaning</span></button>
     <button role="tab" data-mode="listen"><b lang="zh-CN">听力</b><span>Listen</span></button>
@@ -470,6 +526,20 @@ nav.modes button b{font-family:var(--f-zh);font-weight:700}
     </div>
   </div>
   <footer>Words from the classic HSK 1 and HSK 2 vocabulary lists, plus <span class="zh" lang="zh-CN">你好</span>. English meanings and topics were added for this game. Your progress stays in this browser.</footer>
+</div>
+
+<div id="swipeView" hidden>
+  <div class="swtop"><button id="swClose" class="swbtn" aria-label="Close and go home">✕</button>
+    <div class="swtitle"><b><span class="zh" lang="zh-CN">刷词</span> Swipe</b><span id="swWhere"></span></div>
+    <div class="swstat" aria-label="Streak and XP this round">🔥 <b id="swStreak">0</b><span id="swXp">+0</span></div></div>
+  <div class="swfeed" id="feed" aria-live="polite"></div>
+  <div class="rail">
+    <button id="swSpeak" class="swbtn" aria-label="Hear it again"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button>
+    <button id="swStar" class="swbtn" aria-label="Save this word" aria-pressed="false">🤍</button>
+    <button id="swPy" class="swbtn" aria-label="Hide pinyin" aria-pressed="false"><span class="zh" lang="zh-CN">拼</span></button>
+    <button id="swSlow" class="swbtn" aria-label="Slow voice" aria-pressed="false">🐢</button>
+  </div>
+  <div class="toast swtoast" id="swToast" role="status" hidden></div>
 </div>
 
 <div class="wrap" id="pinyinView" hidden>
@@ -602,7 +672,7 @@ function bump(w,ok){ const s=S.score[w.id]||0, n= ok? Math.min(5,s+1) : Math.max
   const before=lastUnit; lastUnit=curUnit(); if(lastUnit>before) unitToast(UNITS[G.lv][before], UNITS[G.lv][lastUnit]); }
 let lastUnit=0;
 function unitToast(done,next){
-  const el=$("#toast"); el.innerHTML=`<b>Unit complete: ${esc(done.name)}!</b> Next up: ${esc(next.name)}. It starts with your next round.`; el.hidden=false;
+  const el=$("#swipeView").hidden ? $("#toast") : $("#swToast"); el.innerHTML=`<b>Unit complete: ${esc(done.name)}!</b> Next up: ${esc(next.name)}. It starts with your next round.`; el.hidden=false;
   clearTimeout(unitToast.t); unitToast.t=setTimeout(()=>el.hidden=true,6000);
 }
 
@@ -675,11 +745,11 @@ function renderTopics(){ // the practice screen only offers this unit, finished 
     box.appendChild(b);
   }
 }
-document.querySelectorAll("nav.modes button").forEach(b=>b.onclick=()=>{ S.mode=b.dataset.mode; if(S.mode!=="list") S.lastMode=S.mode; save(); start(); });
+document.querySelectorAll("nav.modes button").forEach(b=>b.onclick=()=>{ if(b.dataset.mode==="swipe") return showSwipe(); S.mode=b.dataset.mode; if(S.mode!=="list") S.lastMode=S.mode; save(); start(); });
 document.querySelectorAll(".speed button").forEach(b=>{ b.onclick=()=>{ S.rate=+b.dataset.rate; save(); syncSpeed(); }; });
-function syncSpeed(){ document.querySelectorAll(".speed button").forEach(b=>b.setAttribute("aria-pressed", +b.dataset.rate===S.rate)); }
+function syncSpeed(){ document.querySelectorAll(".speed button").forEach(b=>b.setAttribute("aria-pressed", +b.dataset.rate===S.rate)); $("#swSlow")?.setAttribute("aria-pressed", S.rate<0.7); }
 document.querySelectorAll(".toggle button").forEach(b=>{ b.onclick=()=>{ G.hidePy=b.dataset.py==="hide"; save(); syncPy(); }; });
-function syncPy(){ document.body.classList.toggle("hidepy",!!G.hidePy); document.querySelectorAll(".toggle button").forEach(b=>b.setAttribute("aria-pressed", (b.dataset.py==="hide")===!!G.hidePy)); }
+function syncPy(){ document.body.classList.toggle("hidepy",!!G.hidePy); document.querySelectorAll(".toggle button").forEach(b=>b.setAttribute("aria-pressed", (b.dataset.py==="hide")===!!G.hidePy)); $("#swPy")?.setAttribute("aria-pressed", !!G.hidePy); }
 let keyHandler=null;
 document.addEventListener("keydown",e=>{ if(keyHandler && !e.target.matches("input")) keyHandler(e) });
 
@@ -699,7 +769,7 @@ function dayStreak(){
   return n;
 }
 function status(w){ const s=S.score[w.id]; return s===undefined?"new": s>=5?"mastered": s>=3?"learned":"learning"; }
-const MODES=[["cards","卡片","Flashcards","Flip a card, see the English, hear the word."],["quiz","测验","Pick the meaning","10 quick questions in both directions."],["listen","听力","Listen","Hear a word and find it among four."],
+const MODES=[["swipe","刷词","Swipe","Learn like reels: swipe up for the next word, swipe a card right if you knew it, left if not. Double-tap to save."],["cards","卡片","Flashcards","Flip a card, see the English, hear the word."],["quiz","测验","Pick the meaning","10 quick questions in both directions."],["listen","听力","Listen","Hear a word and find it among four."],
   ["match","配对","Match pairs","Race the clock to match six pairs."],["tones","声调","Tones","Hear a word and pick its tones."],["speak","口语","Speak","Say the word out loud and get a pronunciation score."]];
 function Home(){
   keyHandler=null;
@@ -723,7 +793,7 @@ function Home(){
       <h2 class="hhead">${allDone?`${LVL[G.lv].name} complete!`:esc(u.name)}</h2>
       <p class="lede">${allDone?`You've learned every unit in ${LVL[G.lv].name}. Keep reviewing, or move on to the next level.`
         : got>=need? `Unit done!` : got? `${u.words.length} words in this unit. Learn ${need-got} more to unlock the next one.` : `Just ${u.words.length} words. Learn ${need} of them and the next unit unlocks.`}</p>
-      <div class="row"><button class="btn cta" id="goPractice">${got?"Keep practising":"Start this unit"}</button><button class="btn" id="goList">See the ${u.words.length} words</button></div>
+      <div class="row"><button class="btn cta" id="goSwipe"><span class="zh" lang="zh-CN">刷</span> ${got?"Keep swiping":"Swipe to learn"}</button><button class="btn" id="goPractice">More games</button><button class="btn" id="goList">See the ${u.words.length} words</button></div>
     </div>
     <div class="ring big" role="img" aria-label="${got} of ${u.words.length} words in this unit learned">
       <svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--line)" stroke-width="12"/>
@@ -752,7 +822,7 @@ function Home(){
 
   <section class="sec">
     <h3 class="h2">Choose a game</h3>
-    <div class="modecards">${MODES.map(([m,zh,en,d])=>`<button class="modecard" data-m="${m}"><b lang="zh-CN">${zh}</b><span class="en">${en}</span><span class="d">${d}</span></button>`).join("")}</div>
+    <div class="modecards">${MODES.map(([m,zh,en,d])=>`<button class="modecard${m==="swipe"?" feat":""}" data-m="${m}"><b lang="zh-CN">${zh}</b><span class="en">${en}</span><span class="d">${d}</span></button>`).join("")}</div>
   </section>
 
   <div class="two">
@@ -794,9 +864,10 @@ function Home(){
   el.querySelectorAll(".goal-pick button").forEach(b=>b.onclick=()=>{ S.goal=+b.dataset.g; save(); Home(); });
   el.querySelectorAll(".unit.done").forEach(b=>b.onclick=()=>showPractice("cards",+b.dataset.u));
   el.querySelectorAll(".unit.now").forEach(b=>b.onclick=()=>showPractice(S.lastMode||"cards","unit"));
-  el.querySelectorAll(".modecard").forEach(b=>b.onclick=()=>showPractice(b.dataset.m,"unit"));
+  el.querySelectorAll(".modecard").forEach(b=>b.onclick=()=> b.dataset.m==="swipe" ? showSwipe() : showPractice(b.dataset.m,"unit"));
   const rv=$("#rv"); if(rv) weak.forEach(w=>{ const d=document.createElement("div"); d.innerHTML=`<span></span><span>${inline(w)} <span class="muted">${esc(w.en)}</span></span><span class="tag">${esc(w.topic)}</span>`; d.firstChild.appendChild(spkBtn(w,"small")); rv.appendChild(d) });
   $("#goPractice").onclick=()=>showPractice(S.lastMode||"cards","unit");
+  $("#goSwipe").onclick=showSwipe;
   $("#goPinyin").onclick=()=>showPinyin(pn?"path":"chart");
   $("#goList").onclick=()=>showPractice("list","unit");
   $("#goRev") && ($("#goRev").onclick=()=>showPractice("cards","review"));
@@ -828,7 +899,8 @@ function LevelPick(){
 }
 function pronAvg(){ const v=Object.values(S.pron||{}); return v.length? Math.round(v.reduce((a,b)=>a+b,0)/v.length) : "–"; }
 function hideAll(){ stopListening?.(); stopListening=null; if("speechSynthesis" in window) speechSynthesis.cancel(); keyHandler=null;
-  ["#homeView","#practiceView","#pinyinView"].forEach(s=>$(s).hidden=true); }
+  SW?.io?.disconnect(); SW=null; document.documentElement.classList.remove("swiping");
+  ["#homeView","#practiceView","#pinyinView","#swipeView"].forEach(s=>$(s).hidden=true); }
 function showHome(){
   hideAll(); $("#homeView").hidden=false;
   $("#lvBtn").innerHTML=`<b>${lvBadge(G.lv)}</b> ${LVL[G.lv].en} · Change level`; $("#lvBtn").hidden=!G.chosen||G.picking;
@@ -1339,6 +1411,199 @@ function List(){
   };
   $("#q").oninput=draw; $("#onlyStar").onchange=draw; draw();
 }
+
+/* ---------- 刷词: swipe through words like reels ---------- */
+// Swipe up for the next card. On a "do you remember?" card, swipe right if you knew it and left if you didn't.
+// Double-tap any card to ❤️ the word (it's starred in the word list). Uses this unit, with some words from finished units mixed in.
+let SW=null;
+function showSwipe(){
+  hideAll(); $("#swipeView").hidden=false; document.documentElement.classList.add("swiping");
+  syncSpeed(); syncPy(); Swipe();
+}
+function closeSwipe(){ SW?.io?.disconnect(); SW=null; document.documentElement.classList.remove("swiping"); showHome(); }
+function Swipe(){
+  SW?.io?.disconnect();
+  const feed=$("#feed"); feed.innerHTML=""; feed.scrollTop=0;
+  SW={cards:[], cur:-1, streak:0, right:0, xp:0, recent:[], met:new Set(), n:0};
+  SW.io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) swActivate(+e.target.dataset.i); }),{root:feed,threshold:0.6});
+  swMore(); swMore();
+  swTop();
+  keyHandler=e=>{
+    const c=SW?.cards[SW.cur]; if(!c) return;
+    if(["ArrowDown","j"," ","PageDown"].includes(e.key)){ e.preventDefault(); swGo(SW.cur+1); }
+    else if(["ArrowUp","k","PageUp"].includes(e.key)){ e.preventDefault(); swGo(SW.cur-1); }
+    else if(e.key==="ArrowRight" && c.type==="recall") c.decide(true);
+    else if(e.key==="ArrowLeft" && c.type==="recall") c.decide(false);
+    else if(e.key==="Enter" && c.type==="recall") c.reveal();
+    else if(/^[1-4]$/.test(e.key) && c.choose) c.choose(+e.key-1);
+    else if(e.key==="p") swSay(c);
+    else if(e.key==="s" && c.w) swStar(c,true);
+    else if(e.key==="Escape") closeSwipe();
+  };
+}
+function swTop(){
+  const us=UNITS[G.lv], u=us[curUnit()];
+  $("#swWhere").textContent=`${LVL[G.lv].name} · Unit ${u.i+1} · ${unitLearned(u)}/${u.words.length} learned`;
+  $("#swStreak").textContent=SW.streak; $("#swXp").textContent="+"+SW.xp;
+  const c=SW.cards[SW.cur], on=!!(c?.w && S.stars[c.w.id]);
+  $("#swStar").textContent=on?"❤️":"🤍"; $("#swStar").setAttribute("aria-pressed",on);
+}
+function swGo(i){ const c=SW.cards[i]; if(c) c.el.scrollIntoView({behavior:"smooth",block:"start"}); }
+function swSay(c){ if(c?.w) say(c.w.zh); }
+function swActivate(i){
+  if(!SW || i===SW.cur) return;
+  SW.cur=i; const c=SW.cards[i];
+  if(i>=SW.cards.length-4) swMore();
+  swTop();
+  if(c.w) setTimeout(()=>{ if(SW && SW.cur===i) say(c.w.zh); },250);
+}
+// which word next: mostly this unit, about a quarter from finished units, the least known first, never one of the last few
+function swWord(){
+  const us=UNITS[G.lv], ci=curUnit(), cur=us[ci].words, old=us.slice(0,ci).flatMap(u=>u.words);
+  const from = old.length && Math.random()<0.25 ? old : cur;
+  const fresh = from.filter(w=>!SW.recent.includes(w.id));
+  const list = (fresh.length?fresh:from).map(w=>({w,k:(S.score[w.id]??-1)+Math.random()*2.2})).sort((a,b)=>a.k-b.k);
+  const w=list[0].w; SW.recent=[...SW.recent,w.id].slice(-Math.min(4,cur.length-1)); return w;
+}
+function swType(w){
+  const s=S.score[w.id];
+  if(s===undefined && !SW.met.has(w.id)){ SW.met.add(w.id); return "meet"; }
+  const r=Math.random(), canTone=swToneOpts(w).length>1;
+  if((s??0)<=1) return r<.5?"recall":r<.8?"pick":"listen";
+  if(s<=3) return r<.3?"recall":r<.55?"pick":r<.8&&canTone?"tone":"listen";
+  return r<.35&&canTone?"tone":r<.7?"listen":"pick";
+}
+function swMore(){ for(let k=0;k<8;k++){ SW.n++; if(SW.n%11===0) swAdd({type:"progress"}); else swAdd(swNext()); } }
+// never two new words in a row: after meeting one, test a word you met a moment ago
+function swNext(){
+  const prev=SW.cards[SW.cards.length-1], w=swWord();
+  if(prev?.type==="meet" && S.score[w.id]===undefined && !SW.met.has(w.id)){
+    const ids=[...SW.met].filter(id=>id!==prev.w.id && (S.score[id]??0)<3);
+    if(ids.length){ const id=ids[Math.random()*ids.length|0], m=ALL[G.lv][id]; SW.recent=[...SW.recent,id].slice(-4); return {type:Math.random()<.65?"recall":"pick", w:m}; }
+  }
+  return {type:swType(w), w};
+}
+
+// the same word with other tones, never one of the forms that's also right (like ní hǎo for 你好)
+function swToneOpts(w){
+  const ok=new Set(toneForms(w).forms.map(f=>f.t)), out=new Map([[w.tones.join(""),w.py]]);
+  for(let tries=0; tries<40 && out.size<3; tries++){
+    const t=w.tones.map(x=> Math.random()<.6 ? 1+(Math.random()*4|0) : x);
+    if(Math.random()<.3) t[Math.random()*t.length|0]=1+(Math.random()*4|0);
+    const key=t.join(""); if(ok.has(key) || out.has(key)) continue;
+    let k=0; out.set(key, w.py.replace(SYL,m=>mark(stripTone(m),t[k++])));
+  }
+  return [...out.entries()];
+}
+const STATUS_LABEL={new:"new word",learning:"learning",learned:"learned ✓",mastered:"mastered ★"};
+function swAdd(c){
+  const i=SW.cards.length, el=document.createElement("section"); el.className="reel"; el.dataset.i=i; c.el=el; SW.cards.push(c);
+  const w=c.w; let inner="";
+  const head = w ? `<span class="pill">${{meet:"New word",recall:"Do you remember?",pick:"What does it mean?",listen:"What did you hear?",tone:"Which tones?"}[c.type]}</span>` : "";
+  if(c.type==="progress"){
+    const u=UNITS[G.lv][curUnit()], got=unitLearned(u), need=unitNeed(u), C=2*Math.PI*64;
+    inner=`<span class="pill">Your unit</span>
+      <div class="ring big" role="img" aria-label="${got} of ${u.words.length} learned"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--line)" stroke-width="12"/>${got?`<circle cx="75" cy="75" r="64" fill="none" stroke="var(--good)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*Math.min(got,u.words.length)/u.words.length} ${C}"/>`:""}</svg><div class="pct"><b>${got}/${u.words.length}</b><span>learned</span></div></div>
+      <div class="rhead">${esc(u.name)}</div>
+      <p class="rsub">${got>=need?"Unit done! The next one is mixed in now.":`Learn ${need-got} more and the next unit opens.`}<br>This round: ${SW.right} right · +${SW.xp} XP</p>`;
+  } else if(c.type==="meet"){
+    const tf=toneForms(w);
+    inner=`${head}${swWordHTML(w,false)}<div class="ren">${esc(w.en)}</div>
+      ${tf.notes.length?`<p class="rsub">${tf.notes.join("<br>")}</p>`:""}<p class="rsub">${esc(w.topic)} · double-tap to ❤️ save it</p>`;
+  } else if(c.type==="recall"){
+    inner=`${head}<div class="rcard"><span class="stamp yes">Knew it</span><span class="stamp no">Again</span>
+        ${swWordHTML(w,true)}<div class="ren hidden-en">${esc(w.en)}</div><div class="tapme">Tap to see the meaning</div></div>
+      <div class="lr"><button class="btn" data-a="0">← Again</button><button class="btn good" data-a="1">Knew it →</button></div>
+      <p class="rsub">Swipe the card right if you knew it, left if not</p>`;
+  } else if(c.type==="pick"){
+    c.opts=shuffle([w,...distractors(w,1,"en")]);
+    inner=`${head}${swWordHTML(w,true)}<div class="ropts">${c.opts.map((o,k)=>`<button class="opt" data-k="${k}"><kbd>${k+1}</kbd><span>${esc(o.en)}</span></button>`).join("")}</div><div class="rfb"></div>`;
+  } else if(c.type==="listen"){
+    c.opts=shuffle([w,...distractors(w,2,"zh")]);
+    inner=`${head}<button class="speak big-ear" aria-label="Hear it again">${SPK}</button><div class="ropts">${c.opts.map((o,k)=>`<button class="opt" data-k="${k}"><kbd>${k+1}</kbd><span>${wordHTML(o)}</span></button>`).join("")}</div><div class="rfb"></div>`;
+  } else if(c.type==="tone"){
+    c.opts=shuffle(swToneOpts(w));
+    inner=`${head}<div class="wd"><span class="hz rbig${lenCls(w)}" lang="zh-CN">${esc(w.zh)}</span></div><div class="ren small">${esc(w.en)}</div>
+      <div class="ropts">${c.opts.map(([t,py],k)=>`<button class="opt" data-k="${k}"><kbd>${k+1}</kbd><span>${pyHTML(py)}</span></button>`).join("")}</div><div class="rfb"></div>`;
+  }
+  el.innerHTML=`<div class="rin">${inner}</div><div class="swhint" aria-hidden="true">↑ swipe</div>`;
+  $("#feed").appendChild(el); SW.io.observe(el);
+  el.querySelector(".big-ear")?.addEventListener("click",e=>{ e.stopPropagation(); swSay(c); });
+  if(c.opts) swOptions(c);
+  if(c.type==="recall") swRecall(c);
+  // double-tap: ❤️ the word; one tap: hear it again
+  let last=0, timer=0;
+  el.addEventListener("click",e=>{
+    if(e.target.closest("button")||c.dragged){ c.dragged=false; return; }
+    const now=Date.now();
+    if(now-last<320){ clearTimeout(timer); last=0; if(w) swStar(c,false,e); return; }
+    last=now; timer=setTimeout(()=>{ if(c.type==="recall") c.reveal(); else swSay(c); },300);
+  });
+}
+const lenCls = w => w.han.length>=4?" l4":w.han.length===3?" l3":"";
+function swWordHTML(w,q){ return `<div class="wd"><span class="hz rbig${lenCls(w)}" lang="zh-CN">${esc(w.zh)}</span>${pyHTML(w.py,(q?"q ":"")+"rpy")}</div>`; }
+function swStar(c,toggle,e){
+  const on = toggle ? !S.stars[c.w.id] : true;
+  if(on) S.stars[c.w.id]=true; else delete S.stars[c.w.id]; save(); swTop();
+  if(!on) return;
+  const h=document.createElement("span"); h.className="heart"; h.textContent="❤️";
+  if(e){ const r=c.el.getBoundingClientRect(); h.style.left=(e.clientX-r.left)+"px"; h.style.top=(e.clientY-r.top)+"px"; }
+  c.el.appendChild(h); setTimeout(()=>h.remove(),900);
+}
+function swResult(c,ok){
+  bump(c.w,ok);
+  if(ok){ SW.streak++; SW.right++; S.best=Math.max(S.best,SW.streak); const x=c.type==="recall"?4:8+Math.min(SW.streak,5); SW.xp+=x; addXp(x); }
+  else SW.streak=0;
+  save(); c.el.classList.add("revealed"); swTop();
+}
+function swOptions(c){
+  const btns=[...c.el.querySelectorAll(".opt")], w=c.w;
+  c.choose=k=>{
+    if(c.done||!btns[k]) return; c.done=true;
+    const ok = c.type==="tone" ? c.opts[k][0]===w.tones.join("") : c.opts[k].id===w.id;
+    btns.forEach((b,j)=>{ b.disabled=true; const right=c.type==="tone"?c.opts[j][0]===w.tones.join(""):c.opts[j].id===w.id; if(right) b.classList.add("right"); else if(j===k) b.classList.add("wrong"); });
+    swResult(c,ok);
+    const tf=toneForms(w);
+    c.el.querySelector(".rfb").innerHTML = ok ? `<b class="okc">${praise()}</b>${SW.streak>2?` <span class="muted">${SW.streak} in a row</span>`:""}`
+      : `<b class="noc">Not quite.</b> ${inline(w)} = ${esc(w.en)}${c.type==="tone"&&tf.notes.length?`<br><span class="muted">${tf.notes.join("<br>")}</span>`:""}`;
+    say(w.zh);
+    if(ok) setTimeout(()=>{ if(SW && SW.cards[SW.cur]===c) swGo(SW.cur+1); },1100);
+  };
+  btns.forEach((b,k)=>b.onclick=e=>{ e.stopPropagation(); c.choose(k); });
+}
+function swRecall(c){
+  const card=c.el.querySelector(".rcard"), yes=card.querySelector(".stamp.yes"), no=card.querySelector(".stamp.no");
+  c.reveal=()=>{ if(c.shown) return; c.shown=true; c.el.classList.add("revealed"); card.querySelector(".tapme").remove(); swSay(c); };
+  c.decide=ok=>{
+    if(c.done) return; c.done=true; c.reveal();
+    card.style.transition="transform .35s ease, opacity .35s ease"; card.style.transform=`translateX(${ok?120:-120}%) rotate(${ok?14:-14}deg)`; card.style.opacity="0";
+    (ok?yes:no).style.opacity=1;
+    c.el.querySelectorAll(".lr button").forEach(b=>b.disabled=true);
+    swResult(c,ok);
+    setTimeout(()=>{ card.style.transition="opacity .3s"; card.style.transform=""; card.style.opacity="1"; yes.style.opacity=no.style.opacity=0;
+      card.classList.add(ok?"was-yes":"was-no"); },380);
+    setTimeout(()=>{ if(SW && SW.cards[SW.cur]===c) swGo(SW.cur+1); },ok?900:1800);
+  };
+  c.el.querySelectorAll(".lr button").forEach(b=>b.onclick=e=>{ e.stopPropagation(); c.decide(b.dataset.a==="1"); });
+  // drag sideways like a dating app; up and down stays a normal scroll
+  let x0=0,y0=0,dx=0,drag=false,id=null;
+  card.addEventListener("pointerdown",e=>{ if(c.done) return; x0=e.clientX; y0=e.clientY; dx=0; drag=false; id=e.pointerId; });
+  card.addEventListener("pointermove",e=>{
+    if(id!==e.pointerId||c.done) return; const ddx=e.clientX-x0, ddy=e.clientY-y0;
+    if(!drag && Math.abs(ddx)>12 && Math.abs(ddx)>Math.abs(ddy)*1.3){ drag=true; try{card.setPointerCapture(id)}catch(_){} }
+    if(!drag) return; dx=ddx; card.style.transition="none"; card.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`;
+    yes.style.opacity=Math.max(0,Math.min(1,dx/90)); no.style.opacity=Math.max(0,Math.min(1,-dx/90));
+  });
+  const end=()=>{ if(!drag){ id=null; return; } c.dragged=true; drag=false; id=null;
+    if(Math.abs(dx)>90) c.decide(dx>0);
+    else { card.style.transition="transform .25s"; card.style.transform=""; yes.style.opacity=no.style.opacity=0; } };
+  card.addEventListener("pointerup",end); card.addEventListener("pointercancel",()=>{ drag=false; id=null; card.style.transform=""; yes.style.opacity=no.style.opacity=0; });
+}
+$("#swClose").onclick=closeSwipe;
+$("#swSpeak").onclick=()=>swSay(SW?.cards[SW.cur]);
+$("#swStar").onclick=e=>{ const c=SW?.cards[SW.cur]; if(c?.w) swStar(c,true); };
+$("#swPy").onclick=()=>{ G.hidePy=!G.hidePy; save(); syncPy(); };
+$("#swSlow").onclick=()=>{ S.rate = S.rate<0.7 ? 0.85 : 0.55; save(); syncSpeed(); swSay(SW?.cards[SW.cur]); };
 
 /* ================= 拼音: Pinyin basics ================= */
 /* the sounds: from the Pinyin Master site built earlier */
